@@ -1,5 +1,7 @@
 package com.assignment.inventory.repository;
 
+import com.assignment.inventory.exception.InvalidProductException;
+import com.assignment.inventory.exception.InvalidStockOperationException;
 import com.assignment.inventory.exception.ProductNotFoundException;
 import com.assignment.inventory.model.Product;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,7 +25,7 @@ public class ProductRepository implements IProductRepository{
         product.setId(counterId++);
         productMap.put(product.getId(), product);
 
-        return productMap.get(product.getId());
+        return new Product(productMap.get(product.getId()));
     }
 
     @Override
@@ -36,13 +38,21 @@ public class ProductRepository implements IProductRepository{
         if (!productMap.containsKey(id)) {
             throw new ProductNotFoundException("Product not found with id: " + id);
         }
-        return productMap.get(id);
+        return new Product(productMap.get(id));
     }
 
     @Override
     public void update(Product product) {
+        if (product.getId() == null) {
+            throw new InvalidProductException("Product id cannot be null");
+        }
+
         if (!productMap.containsKey(product.getId())) {
             throw new ProductNotFoundException("Product not found with id: " + product.getId());
+        }
+
+        if (product.getStockQuantity() != null && product.getStockQuantity() < 0) {
+            throw new InvalidStockOperationException("Product " + product.getId() + " cannot be updated with -ve stock value: " + Math.abs(product.getStockQuantity()));
         }
 
         Product foundProduct = productMap.get(product.getId());
