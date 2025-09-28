@@ -38,9 +38,6 @@ public class ProductService implements IProductService{
 
     @Override
     public void updateProduct(ProductDto productDto) {
-        if (productDto.getId() == null) {
-            throw new InvalidProductException("Product id cannot be null");
-        }
         iProductRepository.update(DtoToModelMapper.toProduct(productDto));
     }
 

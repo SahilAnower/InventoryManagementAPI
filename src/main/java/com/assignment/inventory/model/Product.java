@@ -10,4 +10,14 @@ public class Product {
     private String name;
     private String description;
     private Integer stockQuantity;
+
+    public Product(Product other) {
+        if (other == null) {
+            throw new IllegalArgumentException("Product to copy cannot be null");
+        }
+        this.id = other.id;
+        this.name = other.name;
+        this.description = other.description;
+        this.stockQuantity = other.stockQuantity;
+    }
 }

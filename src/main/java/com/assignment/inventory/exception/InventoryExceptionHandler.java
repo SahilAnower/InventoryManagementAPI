@@ -34,6 +34,18 @@ public class InventoryExceptionHandler {
         );
     }
 
+    @ExceptionHandler(InvalidStockOperationException.class)
+    public ResponseEntity<CustomErrorResponse> handleInvalidStockOperationException(InvalidStockOperationException ex, WebRequest request) {
+        return new ResponseEntity<>(
+                new CustomErrorResponse(
+                        ex.getMessage(),
+                        request.getDescription(false),
+                        "INVALID_STOCK_OPERATION",
+                        ex
+                ), HttpStatus.BAD_REQUEST
+        );
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<CustomErrorResponse> handleGlobalException(Exception ex, WebRequest webRequest) {
         return new ResponseEntity<>(
