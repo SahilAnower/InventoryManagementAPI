@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "3921a6cb-d97d-4e82-98a6-ca403ecd372a",
+		"name": "InventoryManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12688434"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "CreateProduct",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Jeans\",\r\n    \"description\": \"Normal jeans\",\r\n    \"stockQuantity\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{applicationUrl}}/api/v1/products",
+							"host": [
+								"{{applicationUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"T-shirt\",\r\n    \"description\": \"Normal tshirt\",\r\n    \"stockQuantity\": 5\r\n}"
+						},
+						"url": {
+							"raw": "{{applicationUrl}}/api/v1/products/:productId",
+							"host": [
+								"{{applicationUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								":productId"
+							],
+							"variable": [
+								{
+									"key": "productId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProductById",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 0, \r\n    \"description\": \"Changed description\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{applicationUrl}}/api/v1/products",
+							"host": [
+								"{{applicationUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProductById",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{applicationUrl}}/api/v1/products/:productId",
+							"host": [
+								"{{applicationUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"products",
+								":productId"
+							],
+							"variable": [
+								{
+									"key": "productId",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inventory",
+			"item": [
+				{
+					"name": "IncrementProductStock",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 0,\r\n    \"quantity\": 9\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{applicationUrl}}/api/v1/inventories/increment",
+							"host": [
+								"{{applicationUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"inventories",
+								"increment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DecrementProductStock",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productId\": 0,\r\n    \"quantity\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{applicationUrl}}/api/v1/inventories/decrement",
+							"host": [
+								"{{applicationUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"inventories",
+								"decrement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BelowThresholdProducts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{applicationUrl}}/api/v1/inventories/threshold-products",
+							"host": [
+								"{{applicationUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"inventories",
+								"threshold-products"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "applicationUrl",
+			"value": ""
+		}
+	]
+}
