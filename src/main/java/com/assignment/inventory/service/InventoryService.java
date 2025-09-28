@@ -1,8 +1,11 @@
 package com.assignment.inventory.service;
 
 import com.assignment.inventory.dto.ProductDto;
+import com.assignment.inventory.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class InventoryService implements IInventoryService{
@@ -20,5 +23,14 @@ public class InventoryService implements IInventoryService{
         productDto.setStockQuantity(productDto.getStockQuantity() + quantity);
 
         iProductService.updateProduct(productDto);
+    }
+
+    @Override
+    public List<ProductDto> getProductsBelowThreshold() {
+        List<ProductDto> allProducts = iProductService.getAllProducts();
+
+        return allProducts.stream()
+                .filter(p -> p.getStockQuantity() < Product.thresholdQuantity)
+                .toList();
     }
 }

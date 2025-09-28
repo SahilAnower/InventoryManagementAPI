@@ -10,6 +10,7 @@ public class Product {
     private String name;
     private String description;
     private Integer stockQuantity;
+    public static Integer thresholdQuantity = 5;
 
     public Product(Product other) {
         if (other == null) {

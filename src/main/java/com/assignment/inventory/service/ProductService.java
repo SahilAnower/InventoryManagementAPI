@@ -1,7 +1,6 @@
 package com.assignment.inventory.service;
 
 import com.assignment.inventory.dto.ProductDto;
-import com.assignment.inventory.exception.InvalidProductException;
 import com.assignment.inventory.mapper.DtoToModelMapper;
 import com.assignment.inventory.mapper.ModelToDtoMapper;
 import com.assignment.inventory.repository.IProductRepository;
